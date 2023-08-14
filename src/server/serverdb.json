@@ -1,0 +1,64 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Trùm",
+            "user_name": "admin",
+            "password": "1",
+            "email": "super@gmail.com",
+            "address": {
+                "street": "Thống nhất",
+                "ward": "11",
+                "district": "Gò Vấp",
+                "city": "Hồ Chí Minh"
+            },
+            "phone": "0123456",
+            "job": "Fullstack"
+        },
+        {
+            "id": 2,
+            "name": "Ông Hai",
+            "user_name": "user1",
+            "password": "1",
+            "email": "super@gmail.com",
+            "address": {
+                "street": "Tân Sơn",
+                "ward": "3",
+                "district": "Gò Vấp",
+                "city": "Hồ Chí Minh"
+            },
+            "phone": "0123321",
+            "job": "Font End"
+        },
+        {
+            "id": 3,
+            "name": "Quốc",
+            "user_name": "user2",
+            "password": "1",
+            "email": "super@gmail.com",
+            "address": {
+                "street": "Thống nhất",
+                "ward": "11",
+                "district": "Gò Vấp",
+                "city": "Hồ Chí Minh"
+            },
+            "phone": "0123456",
+            "job": "Back End"
+        },
+        {
+            "id": 4,
+            "name": "Gramar",
+            "user_name": "user3",
+            "password": "1",
+            "email": "super@gmail.com",
+            "address": {
+                "street": "La Thành",
+                "ward": "Chợ Dừa",
+                "district": "Đốn Đa",
+                "city": "Hà Nội"
+            },
+            "phone": "0123456",
+            "job": "Deverloper"
+        }
+    ]
+}

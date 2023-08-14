@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+    * {
+        margin-top: 10px;
+    }
+    .layma {
+        text-align: center;
+        button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: red;
+        }
+    }
+}
