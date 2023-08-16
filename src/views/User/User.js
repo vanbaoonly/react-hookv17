@@ -1,11 +1,16 @@
 import "./User.scss";
 import useFetch from "../../custom_hook/fetchData";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 const User = () => {
 
-    let url = 'http://localhost:3001/data';
+    let url = 'http://localhost:3000/data';
     const { data: ListUser, Loading, ErrorMes } = useFetch(url);
 
-    console.log(" check list", ListUser)
+    const Detail = () => {
+
+    }
+    console.log(" error", ErrorMes)
     return (
         <div className='from_user'>
             <h2>List User</h2>
@@ -20,6 +25,7 @@ const User = () => {
                         <th>Job</th>
                         <th>email</th>
                         <th>address</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +45,7 @@ const User = () => {
                                     <td>{item.job} </td>
                                     <td>{item.email}</td>
                                     <td>{addressAll} </td>
-
+                                    <td><Link className="btn btn-success" to={`/user/${item.id}`}>view Detail</Link> </td>
                                 </tr>
                             )
                         })
@@ -49,14 +55,15 @@ const User = () => {
 
                     {Loading === true &&
                         <tr>
-                            <td colSpan={8}> Loading...</td>
+                            <td colSpan={9}> Loading...</td>
+
                         </tr>
                     }
 
                     {
                         ErrorMes === true &&
                         <tr>
-                            <td colSpan={8}> 404</td>
+                            <td colSpan={9}> 404</td>
                         </tr>
                     }
 

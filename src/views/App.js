@@ -5,7 +5,6 @@ import Home from './Home/Home';
 import Todo from './Todo/Todo';
 import User from './User/User';
 import AddUser from './User/add';
-
 import {
   BrowserRouter,
   Switch,
@@ -13,6 +12,7 @@ import {
   Link
 } from "react-router-dom";
 import Blog from './Blog/Blo';
+import DetailUser from './User/DetailUser';
 function App() {
 
 
@@ -31,8 +31,11 @@ function App() {
             <Route path="/todo">
               <Todo />
             </Route>
-            <Route path="/user">
+            <Route path="/user" exact>
               <User />
+            </Route>
+            <Route path="/user/:id">
+              <DetailUser />
             </Route>
             <Route path="/blog">
               <Blog />

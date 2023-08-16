@@ -13,4 +13,4 @@ Hook
 npm install --save-exact moment@2.29.1 //từ thư viện và sử dụng nó để lấy thời gian hiện tại và định dạng nó theo một định dạng cụ thể.
 
 
-json-server serverdb.json  //--port 3001
+json-server serverdb.json  port 3001
