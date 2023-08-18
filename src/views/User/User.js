@@ -1,77 +1,111 @@
 import "./User.scss";
+import axios from "axios";
+import { toast } from "react-toastify";
 import useFetch from "../../custom_hook/fetchData";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-const User = () => {
+import logo from "../logo.svg"
+import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import AddNewUser from "./AddNewUser";
+const User = (porps) => {
 
+    let history = useHistory();
     let url = 'http://localhost:3000/data';
-    const { data: ListUser, Loading, ErrorMes } = useFetch(url);
+    const { data: DataUser, Loading, ErrorMes } = useFetch(url);
 
-    const Detail = () => {
+    let [NewData, setNewData] = useState([])
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        if (DataUser && DataUser.length > 0) {
+            let data = DataUser;
+            setNewData(data);
+            console.log("effect data :", data, ". datauser :", NewData)
+
+        }
+
+    }, [DataUser])
+
+    const SuccessFull = (data) => {
+        let dataUser = NewData;
+        dataUser.unshift(data);
+
+        setShow(false);
+        setNewData(dataUser);
+        console.log('add new:', NewData)
+    }
+    const View = (id) => {
+        history.push(`/user/${id}`);
+    }
+
+    const Delete = (iddel) => {
+        let data = DataUser;
+        console.log('data1', data)
+        let urldel = (`${url}/${iddel}`);
+        let response = axios.delete(urldel);
+        // if (response) {
+        //     setNewData(data.filter(item => item.id !== iddel))
+
+        // }
+
+        // console.log('new', data)
 
     }
-    console.log(" error", ErrorMes)
     return (
-        <div className='from_user'>
-            <h2>List User</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Name</th>
-                        <th>user_name</th>
-                        <th>password</th>
-                        <th>Phone</th>
-                        <th>Job</th>
-                        <th>email</th>
-                        <th>address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-
+        <>
+            <div className='from_user'>
+                <div className="button-add">
+                    <Button className="add" variant="primary" onClick={handleShow}>
+                        &#43; ADD New
+                    </Button>
+                </div>
+                <div className="container-card">
                     {
                         ErrorMes === false && Loading === false &&
-                        ListUser && ListUser.length > 0 &&
-                        ListUser.map((item, index) => {
-                            const addressAll = `${item.address.street}, ${item.address.ward}, ${item.address.district}, ${item.address.city}`;
+                        DataUser && DataUser.length > 0 &&
+                        DataUser.map((item) => {
                             return (
-                                <tr key={item.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.name} </td>
-                                    <td>{item.user_name}</td>
-                                    <td>{item.password} </td>
-                                    <td>{item.phone}</td>
-                                    <td>{item.job} </td>
-                                    <td>{item.email}</td>
-                                    <td>{addressAll} </td>
-                                    <td><Link className="btn btn-success" to={`/user/${item.id}`}>view Detail</Link> </td>
-                                </tr>
+                                <div key={item.id} className="card" >
+                                    <div className="card-body">
+                                        <h5 className="card-title"> <span>{item.id}</span> Name : {item.name}</h5>
+                                        <p className="card-text">Job :  {item.job}</p>
+                                        {/* <Link to={`/user/${item.id}`} className="btn btn-info card-link"> View</Link> */}
+                                        <div className="btn-action">
+                                            <button className="btn btn-primary" onClick={() => View(item.id)}>View</button>
+                                            <button className="btn btn-danger" onClick={() => Delete(item.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
                             )
                         })
-
                     }
+                </div>
+                {Loading === true &&
+                    <div className='ctn-logoLoading'>
+                        <img src={logo} className="Nav-logo" alt="logo" />
+                        <label>Loading...</label>
+                    </div>
+                }
+                {
+                    ErrorMes === true &&
+                    <span >not found 404</span>
+                }
+            </div >
 
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title >ADD NEW USER</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {/* component add new */}
+                    <AddNewUser SuccessFull={SuccessFull} />
+                </Modal.Body>
 
-                    {Loading === true &&
-                        <tr>
-                            <td colSpan={9}> Loading...</td>
-
-                        </tr>
-                    }
-
-                    {
-                        ErrorMes === true &&
-                        <tr>
-                            <td colSpan={9}> 404</td>
-                        </tr>
-                    }
-
-                </tbody>
-
-            </table>
-
-        </div >
+            </Modal>
+        </>
     )
 }
 
@@ -79,111 +113,3 @@ const User = () => {
 export default User;
 
 
-// import React, { useState } from 'react';
-// import useFetch from "../../custom_hook/fetchData";
-// import "./User.scss";
-
-// const User = () => {
-//     let url = 'http://localhost:3000/data';
-//     const { data: ListUser, Loading, ErrorMes } = useFetch(url);
-//     const [newUser, setNewUser] = useState({}); // Thông tin người dùng mới
-//     const [editingId, setEditingId] = useState(null); // ID của người dùng đang được chỉnh sửa
-
-//     const handleAddUser = async () => {
-//         try {
-//             // Gửi yêu cầu POST đến API để thêm người dùng mới
-//             const response = await fetch(url, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(newUser)
-//             });
-
-//             if (response.ok) {
-//                 // Cập nhật danh sách người dùng sau khi thêm thành công
-//                 const newUserWithId = { ...newUser, id: ListUser.length + 1 };
-//                 setNewUser({});
-//                 // Tải lại danh sách người dùng sau khi thêm
-//                 // Cách này sẽ cần tối ưu hơn trong thực tế
-//             } else {
-//                 console.error('Lỗi khi thêm người dùng');
-//             }
-//         } catch (error) {
-//             console.error('Lỗi:', error);
-//         }
-//         setNewUser({});
-//     };
-
-//     const handleEditUser = (id) => {
-//         // Xử lý sự kiện sửa người dùng
-//         // Cập nhật state hoặc gửi yêu cầu PUT đến API thực
-//         // Set editingId để đánh dấu người dùng đang được chỉnh sửa
-//         setEditingId(id);
-//     };
-
-//     const handleSaveEdit = () => {
-//         // Xử lý sự kiện lưu sửa đổi người dùng
-//         // Cập nhật state hoặc gửi yêu cầu PUT đến API thực
-//         // Sau khi xử lý, bạn có thể reset editingId về null
-//         setEditingId(null);
-//     };
-
-//     const handleDeleteUser = (id) => {
-//         // Xử lý sự kiện xóa người dùng
-//         // Cập nhật state hoặc gửi yêu cầu DELETE đến API thực
-//     };
-
-//     return (
-//         <>
-//             <div className='from_user'>
-//                 <h2>List User</h2>
-//                 {/* ... */}
-//                 <table>
-//                     <thead>
-//                         <tr>
-//                             <th>STT</th>
-//                             <th>Name</th>
-//                             <th>user_name</th>
-//                             <th>password</th>
-//                             <th>Phone</th>
-//                             <th>Job</th>
-//                             <th>email</th>
-//                             <th>address</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {ListUser && ListUser.map((item, index) => (
-//                             <tr key={item.id}>
-//                                 <td>{index + 1}</td>
-//                                 <td>{item.name}</td>
-//                                 <td>{item.user_name}</td>
-//                                 <td>{item.password}</td>
-//                                 <td>{item.phone}</td>
-//                                 <td>{item.job}</td>
-//                                 <td>{item.email}</td>
-//                                 <td>
-//                                     {editingId === item.id ? (
-//                                         <>
-//                                             <button onClick={handleSaveEdit}>Save</button>
-//                                             <button onClick={() => setEditingId(null)}>Cancel</button>
-//                                         </>
-//                                     ) : (
-//                                         <>
-//                                             <button onClick={() => handleEditUser(item.id)}>Edit</button>
-//                                             <button onClick={() => handleDeleteUser(item.id)}>Delete</button>
-//                                         </>
-//                                     )}
-//                                 </td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </div>
-
-
-//         </>
-//     )
-// }
-
-// export default User;

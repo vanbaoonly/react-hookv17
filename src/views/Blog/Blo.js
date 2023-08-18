@@ -5,7 +5,7 @@ const Blog = () => {
 
     let url = 'https://jsonplaceholder.typicode.com/posts';
     const { data: dataBlog, Loading, ErrorMes } = useFetch(url)
-    let dataBlog10 = dataBlog.slice(0, 5);
+    let dataBlog10 = dataBlog.slice(0, 4);
 
     console.log(dataBlog10)
 
@@ -37,14 +37,11 @@ const Blog = () => {
                         })
 
                     }
-
-
                     {Loading === true &&
                         <tr>
                             <td colSpan={3}> Loading...</td>
                         </tr>
                     }
-
                     {
                         ErrorMes === true &&
                         <tr>

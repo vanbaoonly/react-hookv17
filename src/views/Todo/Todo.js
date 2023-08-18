@@ -49,8 +49,8 @@ const Todo = (props) => {
             <div className='container_todo'>
                 <h1>TO DO APP</h1>
                 <div className='top_todo'>
-                    <input className='btn' type='text' value={AddTodo} onChange={(event) => OnchangeInput(event)} />
-                    <button className='btn' type='button' onClick={() => ClickAddNewTodo()}> + Add New</button>
+                    <input className='group' type='text' value={AddTodo} onChange={(event) => OnchangeInput(event)} />
+                    <button className='group' onClick={() => ClickAddNewTodo()}> + Add New</button>
 
                 </div>
 

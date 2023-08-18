@@ -2,7 +2,8 @@ react : version 17.0.2
 react-router-dom@5.3.0
 toast 
 sass
-bootstrap
+bootstrap :
+@import "~bootstrap/scss/bootstrap"; // scss
 
 npm install --save-exact axios@0.23.0
 - Redux 
@@ -13,4 +14,34 @@ Hook
 npm install --save-exact moment@2.29.1 //từ thư viện và sử dụng nó để lấy thời gian hiện tại và định dạng nó theo một định dạng cụ thể.
 
 
-json-server serverdb.json  port 3001
+json-server --watch serverdb.json --port 3001
+ "start": "react-scripts start --port 3001",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  data ={
+      "id": 1,
+      "name": "Trùm",
+      "user_name": "admin",
+      "password": "1",
+      "email": "super@gmail.com",
+      "address": {
+        "street": "Thống nhất",
+        "ward": "11",
+        "district": "Gò Vấp",
+        "city": "Hồ Chí Minh"
+      },
+      "phone": "0123456",
+      "job": "Fullstack"
+    },

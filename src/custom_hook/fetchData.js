@@ -31,7 +31,7 @@ const useFetch = (url) => {
         }
         setTimeout(() => {
             fetchData();
-        }, 1000);
+        }, 500);
         return () => {
             ourRequest.cancel('chiu thua')
         }

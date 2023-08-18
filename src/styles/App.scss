@@ -1,15 +1,14 @@
-.App {
-}
-
 .App-header {
   background-color: #282c34;
-  height: 100vh;
+  height: 10vh;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   font-size: calc(10px + 2vmin);
   color: white;
+  z-index: 1;
 }
-.container {
+.container-content {
+  padding-top: 10vh;
 }

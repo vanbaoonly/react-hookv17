@@ -1,7 +1,6 @@
 
 import { Link, useParams, useHistory } from 'react-router-dom';
 import useFetch from '../../custom_hook/fetchData';
-import Card from 'react-bootstrap/Card';
 import logo from "../logo.svg";
 import "../../styles/index.scss"
 
@@ -16,30 +15,30 @@ function DetailUser(props) {
         : 'Loading...';
     // console.log(url, id)
     const BackUser = () => {
-        history.push("/user");
+        history.goBack();
 
     }
+
 
 
     return (
         <div className='d-flex justify-content-center align-items-center ' style={{ height: "50vh" }}>
             {
                 Loading === false && ErrorMes === false &&
-                <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Title className='text-center '>{detailUser.name}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{detailUser.phone}</Card.Subtitle>
-                        <Card.Subtitle className="mb-2 text-muted">{detailUser.email}</Card.Subtitle>
-                        <Card.Text>
-                            {addressString}
-                        </Card.Text>
-                        <button className=" btn btn-primary" onClick={() => BackUser()} >Back</button>
-                    </Card.Body>
-                </Card>
+                <div className="card" style={{ width: "18rem" }}>
+                    <div className="card-body">
+                        <h5 className="card-title">{detailUser.name}</h5>
+                        <h6 className="card-subtitle mb-2 text-body-secondary">{detailUser.phone}</h6>
+                        <h6 className="card-subtitle mb-2 text-body-secondary">{detailUser.email}</h6>
+                        <p className="card-text">   {addressString}</p>
+                        <button onClick={() => BackUser()} className="btn btn-info card-link"> &#9668; Back User</button>
+
+                    </div>
+                </div>
             }
 
             {Loading === true &&
-                <div className='ctn-logo'>
+                <div className='ctn-logoLoading'>
                     <img src={logo} className="Nav-logo" alt="logo" />
                     <label>Loading...</label>
                 </div>
@@ -47,7 +46,7 @@ function DetailUser(props) {
 
             {ErrorMes === true &&
 
-                <span > User does not exist</span>
+                <h2 style={{ color: "#fff" }} > User information is not available</h2>
             }
 
 

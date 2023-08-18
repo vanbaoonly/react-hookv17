@@ -1,7 +1,9 @@
 .from_user {
     background-color: #282c34;
     color: #fff;
-    h2 {
+    .button-add {
+        margin: 10px 0;
+        width: 100%;
         text-align: center;
     }
     table {
@@ -18,59 +20,60 @@
             font-size: 25px;
         }
     }
+
+    .container-card {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .card {
+            width: calc(25% - 5px);
+        }
+        .btn-action {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
 }
 $primaryColor: #3498db;
 
-.container_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.container-form-add {
+    padding: 20px;
+    max-width: 500px;
+
+    border-radius: 5px;
+    // box-shadow: 0px 3px 5px #fdf;
 
     .form {
-        display: flex;
-        justify-content: space-between;
-        width: 700px;
-        padding: 20px;
-        margin-top: 10px;
-        border: 1px solid;
-        border-radius: 10px;
-        box-shadow: 0px 3px 5px #fdf;
-        .form_grou {
+        .form_group {
             display: flex;
             flex-direction: column;
-            margin-right: 20px;
-
+            margin-top: 15px;
             label {
                 color: $primaryColor;
-                margin-bottom: 5px;
+                margin: 0 0 10px 15px;
             }
 
             input {
-                width: 300px;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 3px;
-                margin-bottom: 10px;
+                padding: 5px 10px;
+                font-size: 20px;
+                border-radius: 10px;
+                color: $primaryColor;
+                outline-color: $primaryColor;
+                // outline-style: outset;
+                // border: none;
+            }
+            input::selection {
+                color: black;
+                background-color: $primaryColor;
             }
         }
-    }
-
-    .btn_add {
-        margin-top: 20px;
-        text-align: center;
-
-        input[type="submit"],
-        input[type="reset"] {
-            background-color: $primaryColor;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-
-            &:last-child {
-                margin-right: 0;
+        .btn_foot {
+            margin-top: 60px;
+            text-align: center;
+            button {
+                margin-right: 20px;
             }
         }
     }

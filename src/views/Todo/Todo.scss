@@ -1,8 +1,10 @@
 .Todo_App {
+    color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 0;
 
     .container_todo {
         margin-top: 100px;
@@ -15,18 +17,18 @@
         }
         .top_todo {
             display: flex;
-
-            .btn {
-                padding: 10px 5px;
+            justify-content: space-between;
+            .group {
+                padding: 5px;
                 outline: none;
                 border: none;
                 border-radius: 5px;
             }
             input {
-                flex-grow: 1;
+                width: 68%;
             }
             button {
-                flex-grow: 1;
+                margin-left: 10px;
                 color: #fff;
                 background-color: #04aa6d;
             }
